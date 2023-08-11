@@ -1,24 +1,13 @@
-import logo from './logo.svg';
-import './App.css';
+import FetchJoke from "./components/FetchJoke";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div className="text-center bg-orange-500 p-10">
+        <span className="text-xl text-white">Chuck Norris Jokes</span>
+      </div>
+      <FetchJoke />
+    </>
   );
 }
 
