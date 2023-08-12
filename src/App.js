@@ -1,4 +1,5 @@
 import FetchJoke from "./components/FetchJoke";
+import Joke from "./components/Joke";
 
 function App() {
   return (
@@ -7,6 +8,7 @@ function App() {
         <span className="text-xl text-white">Chuck Norris Jokes</span>
       </div>
       <FetchJoke />
+      <Joke />
     </>
   );
 }
