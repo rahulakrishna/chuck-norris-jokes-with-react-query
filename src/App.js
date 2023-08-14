@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useQuery } from 'react-query'
+import axios from 'axios'
 
 import FetchJoke from './components/FetchJoke'
 import Joke from './components/Joke'
@@ -16,22 +17,28 @@ function App() {
     error: categoriesError,
     data: categories,
   } = useQuery('chuck-norris-categories', () =>
-    fetch('https://api.chucknorris.io/jokes/categories').then((res) =>
-      res.json(),
-    ),
+    axios
+      .get('https://api.chucknorris.io/jokes/categories')
+      .then((res) => res.data),
   )
   const {
     isLoading: jokeLoading,
     error: jokeError,
     data: joke,
     refetch: refetchJoke,
-  } = useQuery(['chuck-norris-joke', ...queryDependencies], () =>
-    fetch(
-      `https://api.chucknorris.io/jokes/random${
-        category !== 'random' ? `/?category=${category}` : ''
-      }`,
-    ).then((res) => res.json()),
-  )
+  } = useQuery({
+    queryKey: ['chuck-norris-joke', ...queryDependencies],
+    queryFn: () =>
+      axios
+        .get(
+          `https://api.chucknorris.io/jokes/random${
+            category !== 'random' ? `/?category=${category}` : ''
+          }`,
+        )
+        .then((res) => res.data),
+    enabled: true,
+  })
+  console.log({ categories, categoriesLoading, categoriesError })
   return (
     <>
       <div className="text-center bg-orange-500 p-10">
